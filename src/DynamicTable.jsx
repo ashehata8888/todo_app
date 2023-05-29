@@ -6,7 +6,53 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from "@mui/material/Dialog";
+
+
+
+
 function DynamicTable(){
+
+  const [openDialog, handleDisplay] = useState(false);
+
+const handleClose = () => {
+   handleDisplay(false);
+};
+
+const openDialogBox = () => {
+   handleDisplay(true);
+};
+const buttonStyle = {
+   width: "10rem",
+   fontsize: "1.5rem",
+   height: "2rem",
+   padding: "5px",
+   borderRadius: "10px",
+   backgroundColor: "green",
+   color: "White",
+   border: "2px solid yellow",
+};
+const divStyle = {
+   display: "flex",
+   felxDirection: "row",
+   position: "absolute",
+   right: "0px",
+   bottom: "0px",
+   minWidth:"10rem"
+   // padding: "1rem",
+};
+const confirmButtonStyle = {
+   width: "5rem",
+   height: "1.5rem",
+   fontsize: "1rem",
+   backgroundColor: "grey",
+   color: "black",
+   margin: "5px",
+   borderRadius: "10px",
+   border: "1px solid black",
+};
+
 
   const [TableData,setTableData] = useState([{
     
@@ -24,8 +70,11 @@ function DynamicTable(){
   const [realEdit,setRealEdit] = useState(0)
   const [realArchive,setRealArchive] = useState(0)
 
+  const [editCount, setEditCount] = useState(0)
+
   const [dayId,setDayId] = useState(1)
   const [checkboxInx,setCheckboxInx]=useState(0)
+  
 
 
   const [totalExp , setTotalExp] = useState(0)
@@ -33,6 +82,7 @@ function DynamicTable(){
   const [amount,setAmount]=useState(0)
 
   const [actions,setAction]=useState('Ahmed')
+  
 
   
 
@@ -105,6 +155,12 @@ useEffect(()=>{
 
 },[realArchive])
 
+useEffect(()=>{
+
+  realEdit > 0 && realEdit !=  undefined && openDialogBox()
+
+},[realEdit,editCount])
+
 
 
 
@@ -126,6 +182,7 @@ useEffect(()=>{
 
     const onclickEdit = (inx) => {
      setRealEdit(inx)
+     setEditCount(curr=> curr + 1)
     }
 
     console.log("test for inx of Delete Obj...",inx)
@@ -312,6 +369,63 @@ const tdData =() =>{
   return (
 <>
 <ToastContainer />
+
+<>
+      
+         <Dialog onClose = {handleClose} open = {openDialog} 
+         >
+          ------------------------------------------------------------
+            <DialogTitle> Editing </DialogTitle>
+            <div style={{minWidth:"8rem",minHeight:"12rem"}}>
+              
+            <span className="title">Title
+          <input
+          required
+           className="form-control w-50 p-2 text-center col-md-8 offset-md-3 mt-2"
+          
+          placeholder="please Enter title"
+         type="text"
+         onChange={(e)=>{
+            settitle(e.target.value)
+        }}
+        value={title}
+         ></input>
+         </span>
+
+
+    <div className="title">
+        Description <span>
+          <input
+          required
+          
+          className="form-control w-50 p-2 text-center col-md-8 offset-md-3 mt-2"
+          placeholder='please enter description'
+         type='text'
+         onChange={(e)=>setDescription(e.target.value)}
+         value={description}
+         ></input>
+         </span>
+         </div>
+
+<br />
+<br />
+
+
+            <div style = {divStyle}>
+               <button style = {confirmButtonStyle} onClick = {handleClose}>
+                  Confirm
+               </button>
+               <button style = {confirmButtonStyle} onClick = {handleClose}>
+                  Cancel
+               </button>
+            </div>
+
+
+            </div>
+           </Dialog>
+      </>
+
+
 <div className="title">
          {/* <span >{currMonth(month)}</span>  */}
           Title <span>
@@ -372,3 +486,8 @@ const tdData =() =>{
 
 }
 export default DynamicTable;
+
+
+
+
+
