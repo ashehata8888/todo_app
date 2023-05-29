@@ -70,6 +70,9 @@ const confirmButtonStyle = {
   const [realEdit,setRealEdit] = useState(0)
   const [realArchive,setRealArchive] = useState(0)
 
+  const [newTitle,setnewTitle] = useState("")
+  const [newDesc,setnewDesc] = useState("")
+
   const [editCount, setEditCount] = useState(0)
 
   const [dayId,setDayId] = useState(1)
@@ -156,10 +159,20 @@ useEffect(()=>{
 },[realArchive])
 
 useEffect(()=>{
+  let cloneDataTable = [...TableData]
 
-  realEdit > 0 && realEdit !=  undefined && openDialogBox()
+  const edittitlDesc = (realEdit) => {
+    cloneDataTable[realEdit].Title = newTitle
 
-},[realEdit,editCount])
+    cloneDataTable[realEdit].Description = newDesc
+    
+  }
+
+  
+
+  realEdit > 0 && realEdit !=  undefined && edittitlDesc(realEdit)
+
+},[editCount])
 
 
 
@@ -182,7 +195,7 @@ useEffect(()=>{
 
     const onclickEdit = (inx) => {
      setRealEdit(inx)
-     setEditCount(curr=> curr + 1)
+     openDialogBox()
     }
 
     console.log("test for inx of Delete Obj...",inx)
@@ -386,9 +399,9 @@ const tdData =() =>{
           placeholder="please Enter title"
          type="text"
          onChange={(e)=>{
-            settitle(e.target.value)
+          setnewTitle(e.target.value)      
         }}
-        value={title}
+        value={newTitle}
          ></input>
          </span>
 
@@ -401,8 +414,8 @@ const tdData =() =>{
           className="form-control w-50 p-2 text-center col-md-8 offset-md-3 mt-2"
           placeholder='please enter description'
          type='text'
-         onChange={(e)=>setDescription(e.target.value)}
-         value={description}
+         onChange={(e)=>setnewDesc(e.target.value)}
+         value={newDesc}
          ></input>
          </span>
          </div>
@@ -412,7 +425,15 @@ const tdData =() =>{
 
 
             <div style = {divStyle}>
-               <button style = {confirmButtonStyle} onClick = {handleClose}>
+               <button style = {confirmButtonStyle} onClick = {()=>{
+                setEditCount(curr => curr + 1)  
+                setTimeout(()=>handleClose(),0)
+                setTimeout(()=> setnewDesc(""),0)
+                setTimeout(()=> setnewTitle(""),0)
+
+               }
+         
+                }>
                   Confirm
                </button>
                <button style = {confirmButtonStyle} onClick = {handleClose}>
