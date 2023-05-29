@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function DynamicTable(){
 
   const [TableData,setTableData] = useState([{
-    // Id: "" , Description:"", Amount:0 ,Action:""
+    
     Checked:"", Title:"", Description:"", Create_AT:"",Finished_At:"",Archive_At:"",Actions:""
   }])
 
@@ -78,33 +78,6 @@ const regex = /^[0-9\b]+$/;
 
   console.log("TableData is ...",TableData)
 
-  // let dayId = TableData != undefined && TableData.length - 1
-
-// useEffect(()=>{
-
-//   const sumObj = TableData.reduce(
-//     (a, o) => (
-//       Object.entries(o).forEach(
-//         ([k, v]) => (
-
-//           (a["Amount"] += v)
-//           // (a[k] = { ...(a[k] ?? { sum: 0, total: 0 }) }),
-//           // (a[k]['sum'] += v),
-//           // (a[k]['total'] += 1)
-//         )
-//       ),
-//       a
-//     ),
-//   );
-  
-//   console.log("sumObj",sumObj);
-
-// })
-
-
-
-
-
 let clonforDel = [...TableData]
 useEffect(()=>{
   console.log("clonforDel",clonforDel)
@@ -116,7 +89,6 @@ useEffect(()=>{
 
 
 
-// test
 
 console.log("test")
 useEffect(()=>{
@@ -143,7 +115,6 @@ useEffect(()=>{
     const onclickTrash = (inx) =>{
 
       setRealDelete(inx)
-      // console.log("testCloneDelIn",clonforDel)
     
     
     }
@@ -184,14 +155,13 @@ useEffect(()=>{
       setTableData(cloneTable)
       }
       checkboxInx > 0 && checkboxInx !=  undefined && finishedTodo(checkboxInx)
-// trashIconButton(checkboxInx)
+
 
   },[checkboxInx])
-  // dayId,
 
 
   let cloneTable = [...TableData]
-  // console.log("cloneTable",TableData)
+
 
 
   const checkBox = (inx)=>{
@@ -208,16 +178,16 @@ useEffect(()=>{
   console.log("testonChange",e.target.checked)
       if(e.target.checked == true){
         console.log("the check box checked successfully")
-        // setfinishedAt("finished")
+
         setCheckboxInx(inx)
-        // finishedTodo(inx)
+
      
   
-  // cloneTable[inx].Finished_At="finished"
+  
   console.log("cloneTable",inx)
   setTimeout(()=>console.log("cloneTable",TableData),100)
 
-  // setTableData(cloneTable)
+  
 
       }
      
@@ -228,16 +198,10 @@ useEffect(()=>{
       <div>
       <input type="checkbox" onChange={(e)=>handleChange(e)} />
     </div>
-      // <input type="checkbox" id={inx}  />
+      
     )
   }
 
-  // if (TableData != undefined && TableData[0].Id == 0 && TableData.length == 2){
-  //   TableData[1].Id = 1
-  //   //  dayId = 1
-  // } 
-
-  // let dayId = TableData != undefined && TableData.length - 1 
 
   const addvalidate = ()=>{
     if(title != "" && description != ""){
@@ -245,17 +209,17 @@ useEffect(()=>{
     } else {
       
       toast("Please complete all entries!!!"
-      // ,
-      // {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      //   }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
         )
       console.log("Please complete all entries!!!")
     }
@@ -266,8 +230,8 @@ useEffect(()=>{
     const date = new Date().toLocaleString()
 
 
-    // e.preventDefault()
-    // dayId = TableData != undefined && dayId + 1
+    
+    
 
     setDayId(dayId + 1)
 
@@ -281,15 +245,15 @@ console.log("testDate",date)
     let cloneTableData = TableData != undefined && [...TableData]
      cloneTableData = TableData != undefined && [...cloneTableData,mainObj]
      
-    //  cloneTableData[0].Id === "null" && cloneTableData.shift() 
+    
      setTableData(cloneTableData)
 
 
-    // setTimeout(()=>console.log(TableData),0)
+    
     console.log(TableData)
 
-    // const newList = clonforDel.filter((item) => item.Id !== realDelete);
-    // setTableData(newList)
+    
+    
  
   
 
@@ -299,22 +263,22 @@ console.log("testDate",date)
 
   }
 
-//   const TableData=[
-//     {Id:1, Description:"Noor Khan", Amount:25,Action:"male"},
-//     {Id:2, Description:"k", Amount:2,Action:"edit"},
 
-// useEffect(() => {
-//   let coloneTable = [...TableData]
 
-//   coloneTable[0].Id === "null" && coloneTable.shift() 
 
-//   setTableData(coloneTable)
-// },[]);
 
-// get table column
+
+
+
+
+
+
+
+
+
  const column = TableData != undefined && Object.keys(TableData[0]);
 
- // get table heading data
+ 
  const ThData =()=>{
     
      return TableData != undefined && column.map((data)=>{
@@ -322,7 +286,7 @@ console.log("testDate",date)
      })
  }
 
-// get table row data
+
 const tdData =() =>{
    
      return TableData != undefined && TableData.map((data,inx)=>{
@@ -354,7 +318,7 @@ const tdData =() =>{
           <input
           required
            className="form-control w-50 p-2 text-center col-md-8 offset-md-3 mt-2"
-          //  className="titleTxt"
+          
           placeholder="please Enter title"
          type="text"
          onChange={(e)=>{
@@ -369,7 +333,7 @@ const tdData =() =>{
         Description <span>
           <input
           required
-          // className="titleTxt"
+          
           className="form-control w-50 p-2 text-center col-md-8 offset-md-3 mt-2"
           placeholder='please enter description'
          type='text'
@@ -381,7 +345,7 @@ const tdData =() =>{
          {/* Amount <span>
           <input
           required
-          // className="titleTxt"
+          
           className="form-control w-50 p-2 text-center col-md-8 offset-md-3 mt-2"
           placeholder='Enter Amount'
           type='number'
