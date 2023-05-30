@@ -160,11 +160,17 @@ useEffect(()=>{
 
 useEffect(()=>{
   let cloneDataTable = [...TableData]
-
+console.log("testrealEdit...",realEdit)
   const edittitlDesc = (realEdit) => {
-    cloneDataTable[realEdit].Title = newTitle
+    // cloneDataTable[realEdit].Title = newTitle
 
-    cloneDataTable[realEdit].Description = newDesc
+    // cloneDataTable[realEdit].Description = newDesc
+    cloneDataTable.map((item)=>{
+      if(item.Id == realEdit){
+        item.Title = newTitle
+        item.Description = newDesc
+      }
+    })
     
   }
 
