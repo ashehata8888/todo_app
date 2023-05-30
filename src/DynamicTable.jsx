@@ -90,10 +90,7 @@ const confirmButtonStyle = {
   const [longitude,setlongitude] = useState('')
   
 
-  if (latitude > 0 && longitude > 0 ){
-    console.log("testforLat&Long",latitude)
-  console.log("testforLat&Long",longitude)
-  }
+  
   useEffect(()=>{
 
 
@@ -116,15 +113,42 @@ const confirmButtonStyle = {
         // setAccountName(newData);
         const long = newData.longitude;
         const lat = newData.latitude;
+        const apiKeyW = "5fdf2a679529e53e1220bc9ee017b9fa";
 
-        if(long != undefined && lat != undefined){
-          // setlatitude(lat);
-          // setlongitude(long)
-
+        if(long != undefined   && lat != undefined ){
+   console.log(lat)
           setlatitude(lat)
           setlongitude(long)
 
-         const urlW =  `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}`
+          const urlW =  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKeyW}`
+          // https://api.openweathermap.org/data/2.5/weather?lat=30.008&lon=31.2194&appid=5fdf2a679529e53e1220bc9ee017b9fa
+
+         const fetchDataW =  async ()=>{
+           
+            const response = await fetch(
+              urlW ,
+              {
+                method: "GET"
+                // ,
+                // headers: new Headers({
+                //   "Content-Type": "application/x-www-form-urlencoded",
+                // }),
+              }
+            );
+            const newData = await response.json();
+           console.log("testWeatherAPI",newData)
+
+           setcurrentWeather(newData.weather[0].description
+            )
+
+          }
+
+          fetchDataW()
+          // const urlW =  `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKeyW}`
+
+         
+
+     
 
           // console.log("testforLat&Long",lat)
           // console.log("testforLat&Long",long)
@@ -137,7 +161,7 @@ const confirmButtonStyle = {
 
 
 
-      useEffect()
+   
      
    
 // setTimeout(()=>{
@@ -161,7 +185,6 @@ const confirmButtonStyle = {
 
   },[])
 
-  
 
  
 
@@ -540,7 +563,7 @@ const tdData =() =>{
       </>
 
 <>
-{currentWeather}
+<div className="title"> Current Weather is : {currentWeather}</div>
 </>
 <div className="title">
          {/* <span >{currMonth(month)}</span>  */}
