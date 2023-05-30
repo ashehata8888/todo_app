@@ -150,7 +150,13 @@ useEffect(()=>{
 
     const archiveTodo = (inx)=>{
       let cloneTable = [...TableData]
-      cloneTable[inx].Archive_At=date
+
+      cloneTable.map((item)=>{
+       if( item.Id == inx ){
+        item.Archive_At = date
+       }
+      })
+      // cloneTable[inx].Archive_At=date
       setTableData(cloneTable)
       }
       realArchive > 0 && realArchive !=  undefined && archiveTodo(realArchive)
@@ -171,6 +177,8 @@ console.log("testrealEdit...",realEdit)
         item.Description = newDesc
       }
     })
+
+    setTimeout(()=>setTableData(cloneDataTable),100)
     
   }
 
@@ -223,11 +231,16 @@ console.log("testrealEdit...",realEdit)
 
     const date = new Date().toLocaleString()
 
-    const finishedTodo = (checkboxInx)=>{
-      console.log("testtableData",TableData)
-      console.log("testtableData",checkboxInx)
-      let cloneTable = [...TableData]
-      cloneTable[checkboxInx].Finished_At=date
+    let cloneTable = [...TableData]
+
+    const finishedTodo = (inx)=>{
+
+         cloneTable.map((item)=>{
+          if(item.Id == inx){
+            item.Finished_At = date
+          }
+         })
+      // cloneTable[checkboxInx].Finished_At = date
       setTableData(cloneTable)
       }
       checkboxInx > 0 && checkboxInx !=  undefined && finishedTodo(checkboxInx)
