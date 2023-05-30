@@ -84,8 +84,82 @@ const confirmButtonStyle = {
   const [titleRem,settitleRem] = useState(0)
   const [amount,setAmount]=useState(0)
 
-  const [actions,setAction]=useState('Ahmed')
+  const [actions,setAction] = useState('')
+  const [currentWeather, setcurrentWeather]=useState('')
+  const [latitude,setlatitude] = useState('')
+  const [longitude,setlongitude] = useState('')
   
+
+  if (latitude > 0 && longitude > 0 ){
+    console.log("testforLat&Long",latitude)
+  console.log("testforLat&Long",longitude)
+  }
+  useEffect(()=>{
+
+
+
+    setTimeout(()=>{
+    const fetchData = async () => {
+   
+      
+        const response = await fetch(
+          "https://ipgeolocation.abstractapi.com/v1/?api_key=f542526438c04748bf8f4cf6a7dafa77",
+          {
+            method: "GET"
+            // ,
+            // headers: new Headers({
+            //   "Content-Type": "application/x-www-form-urlencoded",
+            // }),
+          }
+        );
+        const newData = await response.json();
+        // setAccountName(newData);
+        const long = newData.longitude;
+        const lat = newData.latitude;
+
+        if(long != undefined && lat != undefined){
+          // setlatitude(lat);
+          // setlongitude(long)
+
+          setlatitude(lat)
+          setlongitude(long)
+
+         const urlW =  `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}`
+
+          // console.log("testforLat&Long",lat)
+          // console.log("testforLat&Long",long)
+
+        }
+      
+      }
+      fetchData();
+      },100)
+
+
+
+      useEffect()
+     
+   
+// setTimeout(()=>{
+//   console.log("testforLat&Long",latitude)
+//   console.log("testforLat&Long",longitude)
+// },2000)
+
+
+
+
+
+// const apiKeyUL = "f542526438c04748bf8f4cf6a7dafa77"
+// const apiURL = 'https://ipgeolocation.abstractapi.com/v1/'
+
+
+// const apiKeyW = ",&appid=5fdf2a679529e53e1220bc9ee017b9fa&units=imperial";
+// // baseURL variable of the API
+// const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
+
+
+
+  },[])
 
   
 
@@ -465,9 +539,12 @@ const tdData =() =>{
            </Dialog>
       </>
 
-
+<>
+{currentWeather}
+</>
 <div className="title">
          {/* <span >{currMonth(month)}</span>  */}
+
           Title <span>
           <input
           required
