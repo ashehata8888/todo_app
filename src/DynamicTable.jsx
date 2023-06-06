@@ -567,6 +567,7 @@ const tdData =() =>{
 </>
 <div className="title">
          {/* <span >{currMonth(month)}</span>  */}
+          {/* <span >{currMonth(month)}</span>  */}
 
           Title <span>
           <input
