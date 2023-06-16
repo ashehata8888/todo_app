@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-       Todo App
+       Todo List App
       </header>
         
         
